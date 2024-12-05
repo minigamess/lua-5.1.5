@@ -16,7 +16,7 @@ jobs:
           brew install make
 
       - name: Build Lua (32-bit)
-        run: make macosx
+        run: make clean && make macosx
 
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
