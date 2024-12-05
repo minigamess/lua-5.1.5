@@ -15,11 +15,6 @@ jobs:
         run: |
           brew install make
 
-      - name: Clean git repository
-        run: |
-          git reset --hard
-          git clean -fdx
-
       - name: Build Lua (64-bit)
         run: make macosx
 
@@ -41,11 +36,6 @@ jobs:
       - name: Set up environment
         run: |
           brew install make
-
-      - name: Clean git repository
-        run: |
-          git reset --hard
-          git clean -fdx
 
       - name: Build Lua (32-bit)
         run: make macosx32
