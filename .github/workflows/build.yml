@@ -4,11 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build64:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        arch: [macosx, macosx32]
 
     steps:
       - name: Checkout repository
@@ -18,11 +15,31 @@ jobs:
         run: |
           brew install make
 
-      - name: Build Lua
-        run: make ${{ matrix.arch }}
+      - name: Build Lua (64-bit)
+        run: make macosx
 
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.arch }}
+          name: lua64
+          path: src/lua
+
+  build32:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up environment
+        run: |
+          brew install make
+
+      - name: Build Lua (32-bit)
+        run: make macosx32
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: lua32
           path: src/lua
