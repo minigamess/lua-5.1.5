@@ -6,6 +6,10 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [macosx, macosx32]
+        artifact_name: [lua64, lua32]
 
     steps:
       - name: Checkout repository
@@ -16,10 +20,10 @@ jobs:
           brew install make
 
       - name: Build Lua
-        run: make macosx
+        run: make ${{ matrix.arch }}
 
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: lua-build
+          name: ${{ matrix.artifact_name }}
           path: src/lua
