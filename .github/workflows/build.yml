@@ -9,7 +9,6 @@ jobs:
     strategy:
       matrix:
         arch: [macosx, macosx32]
-        artifact_name: [lua64, lua32]
 
     steps:
       - name: Checkout repository
@@ -25,5 +24,5 @@ jobs:
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.artifact_name }}
+          name: ${{ matrix.arch }}
           path: src/lua
