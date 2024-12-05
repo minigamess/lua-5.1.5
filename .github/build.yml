@@ -1,0 +1,25 @@
+﻿name: Build Lua on macOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up environment
+        run: |
+          brew install make
+
+      - name: Build Lua
+        run: make macosx
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: lua-build
+          path: src/lua
