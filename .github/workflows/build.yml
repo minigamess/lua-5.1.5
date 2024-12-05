@@ -15,6 +15,11 @@ jobs:
         run: |
           brew install make
 
+      - name: Clean git repository
+        run: |
+          git reset --hard
+          git clean -fdx
+
       - name: Build Lua (64-bit)
         run: make macosx
 
@@ -22,7 +27,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: lua64
-          path: src/lua
+          path: |
+            src/lua
+            src/luac
 
   build32:
     runs-on: macos-latest
@@ -35,6 +42,11 @@ jobs:
         run: |
           brew install make
 
+      - name: Clean git repository
+        run: |
+          git reset --hard
+          git clean -fdx
+
       - name: Build Lua (32-bit)
         run: make macosx32
 
@@ -42,4 +54,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: lua32
-          path: src/lua
+          path: |
+            src/lua
+            src/luac
