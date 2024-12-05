@@ -4,28 +4,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build64:
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up environment
-        run: |
-          brew install make
-
-      - name: Build Lua (64-bit)
-        run: make macosx
-
-      - name: Archive build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: lua64
-          path: |
-            src/lua
-            src/luac
-
   build32:
     runs-on: macos-latest
 
@@ -44,6 +22,27 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: lua32
+          path: |
+            src/lua
+            src/luac
+  build64:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up environment
+        run: |
+          brew install make
+
+      - name: Build Lua (64-bit)
+        run: make macosx
+
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: lua64
           path: |
             src/lua
             src/luac
